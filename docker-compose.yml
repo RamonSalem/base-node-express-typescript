@@ -1,0 +1,21 @@
+version: '3.9'
+services:
+  mongo:
+    container_name: mongo-base-project
+    hostname: mongo
+    image: bitnami/mongodb:latest
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGODB_ROOT_PASSWORD=${MONGODB_ROOT_PASSWORD:-root}
+      - MONGODB_ADVERTISED_HOSTNAME=${MONGODB_ADVERTISED_HOSTNAME:-mongo}
+      - MONGODB_DATABASE=${MONGODB_DATABASE:-base}
+      - MONGODB_USERNAME=${MONGODB_USERNAME:-local}
+      - MONGODB_PASSWORD=${MONGODB_PASSWORD:-root}
+    volumes:
+      - mongo_data:/bitnami/mongodb
+    profiles:
+      - infra
+      - dev
+volumes:
+  mongo_data:
